@@ -1,0 +1,80 @@
+﻿@model SistemaLoja.ViewModels.OrdemView
+
+@{
+    ViewBag.Title = "NovaOrdem";
+}
+
+<h2>Nova Ordem</h2>
+<h5>@ViewBag.Error</h5>
+<h5>@ViewBag.Mensagem</h5>
+
+@using (Html.BeginForm("NovaOrdem", "Ordens", FormMethod.Post))
+{
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Customizar.CustomizarId, "Cliente", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("CustomizarId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Customizar.CustomizarId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @Html.ActionLink("Adicionar Produto", "AddProduto", new {  }, new {@class="btn btn-primary" })
+
+    
+      
+            <input type="submit" value="Criar Ordem" id="NovaOrdem" class="btn btn-success" />
+      
+
+
+</div>
+}
+
+<h4>Detalhes do Pedido</h4>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Produto.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Produto.Preco)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Produto.Quantidade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Produto.Valor)
+        </th>
+        
+        <th></th>
+    </tr>
+
+   @for(int i =0; i < Model.Produtos.Count; i++)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Produtos[i].Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Produtos[i].Preco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Produtos[i].Quantidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Produtos[i].Valor)
+            </td>
+           
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = Model.Produtos[i].ProdutoId }) |
+               
+                @Html.ActionLink("Excluir", "Delete", new { id = Model.Produtos[i].ProdutoId })
+            </td>
+        </tr>
+    }
+
+</table>

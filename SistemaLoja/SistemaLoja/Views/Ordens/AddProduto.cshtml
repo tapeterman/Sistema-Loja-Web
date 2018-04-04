@@ -1,0 +1,38 @@
+﻿@model SistemaLoja.Models.ProdutoOrdem
+@{
+    ViewBag.Title = "AddProduto";
+}
+
+<h2>Adicionar Produto</h2>
+<h5>@ViewBag.Error</h5>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProdutoId, "ProdutoId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ProdutoId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ProdutoId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Quantidade, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Quantidade, "", new { @class = "text-danger" })
+            </div>
+        </div>    
+
+
+
+        <input type="submit" value="Adicionar" id="NovaOrdem" class="btn btn-default" />
+
+
+
+    </div>
+}
